@@ -1,0 +1,13 @@
+﻿@model List<AboutModel>
+@{
+
+}
+
+<div class="alert alert-danger">Hello</div>
+
+@{
+    foreach (var m in Model)
+    {
+        <p>@m.ToString()</p>
+    }
+}

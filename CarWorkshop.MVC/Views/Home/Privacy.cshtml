@@ -1,0 +1,30 @@
+﻿@model List<Person>
+
+@{
+    ViewData["Title"] = "Privacy Policy";
+    var currentYear = DateTime.Now.Year;
+    var dayOfWeek = DateTime.Now.DayOfWeek;
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's. xDDD</p>
+
+@{
+    
+}
+<p>@currentYear</p>
+@if(dayOfWeek is DayOfWeek.Sunday or DayOfWeek.Saturday)
+    {
+        <p>It's weekend</p>
+    }
+    else
+    {
+        <p>Not yet weekend</p>
+    }
+
+@{
+    foreach(var m in Model)
+    {
+        <p>@m.ToString()</p>
+    }
+}
