@@ -12,9 +12,11 @@ public class CarWorkshopDbContext : DbContext
 {
     public DbSet<Domain.Entities.CarWorkshop> CarWorkshops { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    private CarWorkshopDbContext(){ }
+
+    public CarWorkshopDbContext(DbContextOptions<CarWorkshopDbContext> options) : base(options)
     {
-        optionsBuilder.UseSqlServer("Data Source=localhost,1433;Database=CarWorkshopDb;Integrated Security=false;User ID=sa;Password=SqlServer123!;TrustServerCertificate=True");
+
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
