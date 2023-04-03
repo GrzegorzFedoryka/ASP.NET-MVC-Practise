@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using CarWorkshop.Infrastructure.Seeders;
 
 namespace CarWorkshop.Infrastructure.Extensions;
 
@@ -19,5 +20,7 @@ public static class ServiceCollectionExtension
         {
             options.UseSqlServer(connectionSting);
         });
+
+        services.AddScoped<CarWorkshopSeeder>();
     }
 }

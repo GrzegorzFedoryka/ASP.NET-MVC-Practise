@@ -1,4 +1,5 @@
 ﻿using CarWorkshop.Domain.Entities;
+using CarWorkshop.Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ public class CarWorkshopDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(IModelBuilderConfigurationMarker).Assembly);
+
         modelBuilder.Entity<Domain.Entities.CarWorkshop>()
             .OwnsOne(e => e.ContactDetails);
     }
