@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using CarWorkshop.Infrastructure.Seeders;
+using CarWorkshop.Infrastructure.Repositories;
 
 namespace CarWorkshop.Infrastructure.Extensions;
 
@@ -22,5 +23,21 @@ public static class ServiceCollectionExtension
         });
 
         services.AddScoped<CarWorkshopSeeder>();
+        services.AddRepositories();
+    }
+
+    private static void AddRepositories(this IServiceCollection services)
+    {
+        var assemblyServices = typeof(IRepositoryMarker).Assembly.GetTypes()
+                .Where(x => typeof(IRepositoryMarker).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract);
+
+        foreach (var serviceType in assemblyServices)
+        {
+            var interfaces = serviceType.GetInterfaces().Except(new[] { typeof(IRepositoryMarker) });
+            foreach (var @interface in interfaces)
+            {
+                services.AddScoped(@interface, serviceType);
+            }
+        }
     }
 }

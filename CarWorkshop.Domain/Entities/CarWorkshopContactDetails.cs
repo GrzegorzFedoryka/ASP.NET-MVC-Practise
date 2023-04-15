@@ -8,8 +8,30 @@ namespace CarWorkshop.Domain.Entities;
 
 public class CarWorkshopContactDetails
 {
-    public string? PhoneNumber { get; set; }
-    public string? Street { get; set; }
-    public string? City { get; set; }
-    public string? PostalCode { get; set; }
+    internal CarWorkshopContactDetails()
+    {
+
+    }
+    public string? PhoneNumber { get; private set; }
+    public string? Street { get; private set; }
+    public string? City { get; private set; }
+    public string? PostalCode { get; private set; }
+
+    public void SetPhoneNumber(string? phoneNumber)
+    {
+        PhoneNumber = phoneNumber;
+    }
+    public void SetStreet(string? street)
+    {
+        Street = street;
+    }
+    public void SetCity(string? city)
+    {
+        City = city;
+    }
+    public void SetPostalCode(string? postalCode)
+    {
+        PostalCode = postalCode;
+    }
+
 }

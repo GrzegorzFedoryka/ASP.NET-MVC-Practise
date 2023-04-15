@@ -1,4 +1,5 @@
-﻿using CarWorkshop.Domain.Interfaces;
+﻿using CarWorkshop.Application.Dtos;
+using CarWorkshop.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace CarWorkshop.Application.Services;
 
 public interface ICarWorkshopService
 {
-    Task CreateAsync(Domain.Entities.CarWorkshop carWorkshop);
+    Task CreateAsync(CarWorkshopDto carWorkshopDto);
 }
 
 public class CarWorkshopService : ICarWorkshopService, IServiceMarker
@@ -20,8 +21,8 @@ public class CarWorkshopService : ICarWorkshopService, IServiceMarker
     {
         _carWorkshopRepository = carWorkshopRepository;
     }
-    public async Task CreateAsync(Domain.Entities.CarWorkshop carWorkshop)
+    public async Task CreateAsync(CarWorkshopDto carWorkshopDto)
     {
-        await _carWorkshopRepository.CreateAsync(carWorkshop);
+        await _carWorkshopRepository.CreateAsync(carWorkshopDto.ToCarWorkshop());
     }
 }

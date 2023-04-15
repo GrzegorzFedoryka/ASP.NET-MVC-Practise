@@ -1,3 +1,4 @@
+using CarWorkshop.Application.Dtos;
 using CarWorkshop.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +12,15 @@ public class CarWorkshopController : Controller
     {
         _carWorkshopService = carWorkshopService;
     }
-    [HttpPost]
-    public async Task<IActionResult> Create(Domain.Entities.CarWorkshop carWorkshop)
+    public IActionResult Create()
     {
-        await _carWorkshopService.CreateAsync(carWorkshop);
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(CarWorkshopDto carWorkshopDto)
+    {
+        await _carWorkshopService.CreateAsync(carWorkshopDto);
 
         return RedirectToAction(nameof(Create)); //TODO: refactor
     }

@@ -24,16 +24,12 @@ public class CarWorkshopSeeder
             && !await _dbContext.CarWorkshops.AnyAsync())
         {
             await _dbContext.CarWorkshops.AddRangeAsync(
-                new Domain.Entities.CarWorkshop()
-                    .SetName("U Janka")
+                Domain.Entities.CarWorkshop.Create("U Janka")
                     .SetDescription("Najtańszy workshop")
-                    .SetDetails(new CarWorkshopContactDetails
-                    {
-                        City = "Wrocław",
-                        PhoneNumber = "+48 555 444 333",
-                        PostalCode = "51-317",
-                        Street = "Bierutowska 51"
-                    })
+                    .SetStreet("Bierutowska 51")
+                    .SetPostalCode("51-307")
+                    .SetCity("Wrocław")
+                    .SetPhoneNumber("+48 555 444 333")
                     );
 
             await _dbContext.SaveChangesAsync();

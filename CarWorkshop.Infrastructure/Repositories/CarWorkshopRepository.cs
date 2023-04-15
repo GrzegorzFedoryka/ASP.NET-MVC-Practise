@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CarWorkshop.Infrastructure.Repositories;
 
-internal class CarWorkshopRepository : ICarWorkshopRepository
+internal class CarWorkshopRepository : ICarWorkshopRepository, IRepositoryMarker
 {
     private readonly CarWorkshopDbContext _context;
 

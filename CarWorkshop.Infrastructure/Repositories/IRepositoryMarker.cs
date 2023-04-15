@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarWorkshop.Application.Services;
+namespace CarWorkshop.Infrastructure.Repositories;
 
-internal interface IServiceMarker
+internal interface IRepositoryMarker
 {
 }
