@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,10 +8,10 @@ using System.Threading.Tasks;
 namespace CarWorkshop.Application.Dtos;
 
 public record CarWorkshopDto(
-    string Name, 
+    [Required] string Name, 
     string? Description, 
     string? About, 
-    string? PhoneNumber,
+    [StringLength(12, MinimumLength = 8)] string? PhoneNumber,
     string? Street,
     string? City,
     string? PostalCode)
