@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace CarWorkshop.Application.Dtos;
 
-public record CarWorkshopDto(
-    [Required] string Name, 
+public record class CarWorkshopDto(
+    string Name, 
     string? Description, 
     string? About, 
-    [StringLength(12, MinimumLength = 8)] string? PhoneNumber,
+    string? PhoneNumber,
     string? Street,
     string? City,
     string? PostalCode)
@@ -29,5 +30,30 @@ public record CarWorkshopDto(
             .SetStreet(Street);
 
         return carWorkshop;
+    }
+
+    public static CarWorkshopDto FromCarWorkshop(Domain.Entities.CarWorkshop carWorkshop)
+    {
+        return new CarWorkshopDto(
+            carWorkshop.Name,
+            carWorkshop.Description,
+            carWorkshop.About,
+            carWorkshop.ContactDetails.PhoneNumber,
+            carWorkshop.ContactDetails.Street,
+            carWorkshop.ContactDetails.City,
+            carWorkshop.ContactDetails.PostalCode);
+    }
+}
+
+public class CarWorkshopDtoValidator : AbstractValidator<CarWorkshopDto>
+{
+    public CarWorkshopDtoValidator()
+    {
+        RuleFor(cw => cw.Name).NotEmpty();
+
+        RuleFor(cw => cw.PhoneNumber)
+            .NotEmpty()
+            .MinimumLength(8)
+            .MaximumLength(12);
     }
 }

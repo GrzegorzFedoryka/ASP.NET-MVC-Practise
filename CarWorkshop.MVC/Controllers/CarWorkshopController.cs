@@ -28,4 +28,10 @@ public class CarWorkshopController : Controller
 
         return RedirectToAction(nameof(Create)); //TODO: refactor
     }
+    public async Task<IActionResult> Index()
+    {
+        var carWorkshops = await _carWorkshopService.GetAllAsync();
+
+        return View(carWorkshops);
+    }
 }

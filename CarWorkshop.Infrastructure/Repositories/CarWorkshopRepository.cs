@@ -1,5 +1,6 @@
 ﻿using CarWorkshop.Domain.Interfaces;
 using CarWorkshop.Infrastructure.Persistance;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +22,10 @@ internal class CarWorkshopRepository : ICarWorkshopRepository, IRepositoryMarker
     {
         _context.Add(carWorkshop);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<Domain.Entities.CarWorkshop>> GetAllAsync()
+    {
+        return await _context.CarWorkshops.ToListAsync();
     }
 }
