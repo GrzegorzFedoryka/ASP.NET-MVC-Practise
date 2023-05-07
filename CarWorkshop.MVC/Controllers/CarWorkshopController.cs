@@ -26,7 +26,7 @@ public class CarWorkshopController : Controller
         }
         await _carWorkshopService.CreateAsync(carWorkshopDto);
 
-        return RedirectToAction(nameof(Create)); //TODO: refactor
+        return RedirectToAction(nameof(Index));
     }
     public async Task<IActionResult> Index()
     {
